@@ -20,7 +20,12 @@ namespace SnakeGame
             int dx = 1, dy = 0;
             int consoleWidthLimit = 79;
             int consoleHeightLimit = 24;
+            //Random value
+            Random randx = new Random();
+            Random randy = new Random();
 
+            // fix window size
+            Console.SetWindowSize(consoleWidthLimit + 2, consoleHeightLimit + 2);
             // clear to color
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Clear();
@@ -30,6 +35,16 @@ namespace SnakeGame
 
             // whether to keep trails
             bool trail = false;
+
+            //Food
+            Food food = new Food("#", randx.Next(1, 78), randy.Next(1, 23));
+            food.GenerateFood();
+            //Obstacles
+            for (int i = 0; i < 10; i++)
+            {
+                Obstacles obstacles = new Obstacles("||", randx.Next(1, 78), randy.Next(1, 23));
+                obstacles.GenerateObstacles();
+            }
 
             do // until escape
             {
@@ -49,7 +64,7 @@ namespace SnakeGame
                     consoleKey = Console.ReadKey(true);
                     switch (consoleKey.Key)
                     {
-                      
+
                         case ConsoleKey.UpArrow: //UP
                             dx = 0;
                             dy = -1;
@@ -105,5 +120,5 @@ namespace SnakeGame
             } while (gameLive);
         }
     }
-    
+
 }

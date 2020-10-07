@@ -45,7 +45,7 @@ namespace SnakeGame
             int foodx = randx.Next(1, 78);
             int foody = randy.Next(1, 23);
             Food food = new Food("#", randx.Next(1, 78), randy.Next(1, 23));
-            food.GenerateFood();
+            food.GenerateFood(foodx, foody);
             //Obstacles
             for (int i = 0; i < 10; i++)
             {

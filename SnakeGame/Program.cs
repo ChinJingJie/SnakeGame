@@ -11,7 +11,7 @@ namespace SnakeGame
             Console.ReadKey();
 
             // display this char on the console during the game
-            char ch = '*';
+            string ch = "***";
             bool gameLive = true;
             ConsoleKeyInfo consoleKey; // holds whatever key is pressed
 
@@ -37,14 +37,21 @@ namespace SnakeGame
             bool trail = false;
 
             //Food
-            Food food = new Food("#", randx.Next(1, 78), randy.Next(1, 23));
-            food.GenerateFood();
+            int foodx = randx.Next(1, 78);
+            int foody = randy.Next(1, 23);
+            Food food = new Food("#", foodx, foody);
+            food.GenerateFood(foodx, foody);
+
+            
+          
             //Obstacles
             for (int i = 0; i < 10; i++)
             {
                 Obstacles obstacles = new Obstacles("||", randx.Next(1, 78), randy.Next(1, 23));
                 obstacles.GenerateObstacles();
             }
+
+            string snakelength = "   ";
 
             do // until escape
             {
@@ -56,6 +63,9 @@ namespace SnakeGame
                 Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
                 Console.SetCursorPosition(x, y);
                 Console.ForegroundColor = cc;
+
+                
+
 
                 // see if a key has been pressed
                 if (Console.KeyAvailable)
@@ -79,6 +89,7 @@ namespace SnakeGame
                             dx = -1;
                             dy = 0;
                             Console.ForegroundColor = ConsoleColor.Green;
+
                             break;
                         case ConsoleKey.RightArrow: //RIGHT
                             dx = 1;
@@ -89,13 +100,14 @@ namespace SnakeGame
                             gameLive = false;
                             break;
                     }
+                    
                 }
 
                 // find the current position in the console grid & erase the character there if don't want to see the trail
                 Console.SetCursorPosition(x, y);
                 if (trail == false)
-                    Console.Write(' ');
-
+                    Console.Write(snakelength);
+                
                 // calculate the new position
                 // note x set to 0 because we use the whole width, but y set to 1 because we use top row for instructions
                 x += dx;
@@ -110,9 +122,22 @@ namespace SnakeGame
                 if (y < 2)
                     y = consoleHeightLimit;
 
+                
                 // write the character in the new position
                 Console.SetCursorPosition(x, y);
                 Console.Write(ch);
+
+                if (x == foodx && y == foody)
+                {
+                    ch += "*";
+                    snakelength += " ";
+                    foodx = randx.Next(1, 78);
+                    foody = randy.Next(1, 23);
+                    Food food1 = new Food("#", foodx, foody);
+                    food.GenerateFood(foodx, foody);
+                }
+
+
 
                 // pause to allow eyeballs to keep up
                 System.Threading.Thread.Sleep(delayInMillisecs);

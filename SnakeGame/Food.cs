@@ -36,9 +36,9 @@ namespace SnakeGame
             set { _foody = value; }
         }
 
-        public void GenerateFood()
+        public void GenerateFood(int foodx, int foody)
         {
-            Console.SetCursorPosition(_foodx, _foody);
+            Console.SetCursorPosition(foodx, foody);
             Console.Write(_food);
         }
     }

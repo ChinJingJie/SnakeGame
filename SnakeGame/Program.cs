@@ -35,6 +35,12 @@ namespace SnakeGame
 
             // whether to keep trails
             bool trail = false;
+            
+             // Timer
+            int times = 0;
+            bool timesUp = true;
+            int foodx = randx.Next(1, 78);
+            int foody = randy.Next(1, 23);
 
             //Food
             Food food = new Food("#", randx.Next(1, 78), randy.Next(1, 23));
@@ -56,6 +62,20 @@ namespace SnakeGame
                 Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
                 Console.SetCursorPosition(x, y);
                 Console.ForegroundColor = cc;
+                times++;
+
+                if (times == 50)
+                {
+                    Console.SetCursorPosition(foodx, foody);
+                    if (timesUp == true) {
+                        Console.Write(' ');
+                    }
+                    foodx = randx.Next(1, 78);
+                    foody = randy.Next(1, 23);
+                    Food food = new Food("#", foodx, foody);
+                    food.GenerateFood();
+                    times = 0;                                       
+                }
 
                 // see if a key has been pressed
                 if (Console.KeyAvailable)

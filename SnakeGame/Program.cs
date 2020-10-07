@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Timers;
+using System.Threading;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SnakeGame
 {
@@ -13,6 +17,7 @@ namespace SnakeGame
             // display this char on the console during the game
             char ch = '*';
             bool gameLive = true;
+           
             ConsoleKeyInfo consoleKey; // holds whatever key is pressed
 
             // location info & display
@@ -36,9 +41,12 @@ namespace SnakeGame
             // whether to keep trails
             bool trail = false;
 
-            //Food
-            Food food = new Food("#", randx.Next(1, 78), randy.Next(1, 23));
-            food.GenerateFood();
+            // Timer
+            int times = 0;
+            bool timesup = true;
+            int foodx = randx.Next(1, 78);
+            int foody = randy.Next(1, 23);
+
             //Obstacles
             for (int i = 0; i < 10; i++)
             {
@@ -56,7 +64,23 @@ namespace SnakeGame
                 Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
                 Console.SetCursorPosition(x, y);
                 Console.ForegroundColor = cc;
+                times++;
 
+                if (times == 50)
+                {
+                    Console.SetCursorPosition(foodx, foody);
+                    if (timesup == true)
+                    {
+                        Console.Write(' ');
+                    }
+                    foodx = randx.Next(1, 78);
+                    foody = randy.Next(1, 23);
+                    Food food = new Food("#", foodx, foody);
+                    food.GenerateFood();
+                    times = 0;               
+                        
+                }
+              
                 // see if a key has been pressed
                 if (Console.KeyAvailable)
                 {

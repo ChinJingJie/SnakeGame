@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\cjjie\\.nuget\\packages\\": {}
+    "C:\\Users\\wounk\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cjjie\\Desktop\\SnakeGame\\SnakeGame\\SnakeGame.csproj",
+      "projectUniqueName": "C:\\Users\\wounk\\Desktop\\SnakeGame\\SnakeGame\\SnakeGame.csproj",
       "projectName": "SnakeGame",
-      "projectPath": "C:\\Users\\cjjie\\Desktop\\SnakeGame\\SnakeGame\\SnakeGame.csproj",
-      "packagesPath": "C:\\Users\\cjjie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cjjie\\Desktop\\SnakeGame\\SnakeGame\\obj\\",
+      "projectPath": "C:\\Users\\wounk\\Desktop\\SnakeGame\\SnakeGame\\SnakeGame.csproj",
+      "packagesPath": "C:\\Users\\wounk\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\wounk\\Desktop\\SnakeGame\\SnakeGame\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\cjjie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\wounk\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

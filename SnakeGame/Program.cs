@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Encodings.Web;
 
 namespace SnakeGame
 {
@@ -14,6 +17,7 @@ namespace SnakeGame
             string ch = "***";
             bool gameLive = true;
             ConsoleKeyInfo consoleKey; // holds whatever key is pressed
+            
 
             // location info & display
             int x = 0, y = 2; // y is 2 to allow the top row for directions & space
@@ -26,11 +30,16 @@ namespace SnakeGame
             // point initialization
             int pts = 0;
             //randomize food position 
-            int foodx = randx.Next(1, 78); 
-            int foody = randy.Next(1, 23); 
+            int foodx = randx.Next(1, 78);  
+            int foody = randy.Next(1, 23);
             //randomize obstacle position 
-            int obstaclex = randx.Next(1, 78); 
+            int obstaclex = randx.Next(1, 78);
             int obstacley = randy.Next(1, 23);
+            List<int> Obstaclesx = new List<int>();
+            List<int> Obstaclesy = new List<int>();
+
+            bool stop = true;
+
 
             // fix window size
             Console.SetWindowSize(consoleWidthLimit + 2, consoleHeightLimit + 2);
@@ -53,15 +62,25 @@ namespace SnakeGame
             Food food = new Food("#", randx.Next(1, 78), randy.Next(1, 23));
             food.GenerateFood(foodx, foody);
             //Obstacles
+
             for (int i = 0; i < 10; i++)
             {
-                if (obstaclex != foodx && obstacley != foody)
-                {
-                    Obstacles obstacles = new Obstacles("||", randx.Next(1, 78), randy.Next(1, 23));
-                    obstacles.GenerateObstacles();
-                }
+                obstaclex = randx.Next(1, 78);
+                obstacley = randy.Next(1, 23);
+
+                Obstaclesx.Add(obstaclex);
+                Obstaclesy.Add(obstacley);
+
+                Obstacles obstacles = new Obstacles("||", randx.Next(1, 78), randy.Next(1, 23));
+                obstacles.GenerateObstacles(obstaclex, obstacley);
             }
 
+            //if (obstaclex != foodx && obstacley != foody)
+            //{
+                
+                
+            //}
+           
             string snakelength = "   ";
             do // until escape
             {
@@ -78,7 +97,7 @@ namespace SnakeGame
                 Console.ForegroundColor = cc;
                 times++;
 
-                if (times == 120)
+                if (times == 120 && stop == true)
                 {
                     Console.SetCursorPosition(foodx, foody);
                     if (timesUp == true) {
@@ -158,6 +177,35 @@ namespace SnakeGame
                     Food food1 = new Food("#", foodx, foody);
                     food.GenerateFood(foodx, foody);
                 }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    if (x == Obstaclesx[i] && y == Obstaclesy[i])
+                    {
+                        dx = 0;
+                        dy = 0;
+
+                        stop = false;
+
+                        Console.SetCursorPosition(consoleWidthLimit / 2, consoleHeightLimit / 2);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Game Over", Console.ForegroundColor);
+                        Console.SetCursorPosition(consoleWidthLimit / 2, (consoleHeightLimit / 2) + 1);
+                        Console.WriteLine( "Score: " + pts);
+
+                        if (Console.KeyAvailable)
+                        {
+                            consoleKey = Console.ReadKey(true);
+
+                            if (consoleKey.Key == ConsoleKey.Enter)
+                            {
+                                gameLive = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                
 
                 // pause to allow eyeballs to keep up
                 System.Threading.Thread.Sleep(delayInMillisecs);

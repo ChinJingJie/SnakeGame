@@ -37,9 +37,9 @@ namespace SnakeGame
             set { _obstacley = value; }
         }
 
-        public void GenerateObstacles()
+        public void GenerateObstacles(int obstaclex, int obstacley)
         {
-            Console.SetCursorPosition(_obstaclex, _obstacley);
+            Console.SetCursorPosition(obstaclex, obstacley);
             Console.Write(_obstacle);
         }
     }

@@ -181,10 +181,10 @@ namespace SnakeGame
 
                         stop = false;
 
-                        Console.SetCursorPosition(consoleWidthLimit / 2, consoleHeightLimit / 2);
+                        Console.SetCursorPosition((consoleWidthLimit / 2)-3, consoleHeightLimit / 2);
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Game Over", Console.ForegroundColor);
-                        Console.SetCursorPosition(consoleWidthLimit / 2, (consoleHeightLimit / 2) + 1);
+                        Console.SetCursorPosition((consoleWidthLimit / 2)-3, (consoleHeightLimit / 2) + 1);
                         Console.WriteLine( "Score: " + pts);
 
                         if (Console.KeyAvailable)
@@ -196,6 +196,32 @@ namespace SnakeGame
                                 gameLive = false;
                                 break;
                             }
+                        }
+                    }
+                }
+                
+                if(pts == 20)
+                {
+
+                    dx = 0;
+                    dy = 0;
+
+                    stop = false;
+
+                    Console.SetCursorPosition((consoleWidthLimit / 2)-3, consoleHeightLimit / 2);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Game Finished", Console.ForegroundColor);
+                    Console.SetCursorPosition((consoleWidthLimit / 2) - 3, (consoleHeightLimit / 2) + 1);
+                    Console.WriteLine("Score: " + pts);
+
+                    if (Console.KeyAvailable)
+                    {
+                        consoleKey = Console.ReadKey(true);
+
+                        if (consoleKey.Key == ConsoleKey.Enter)
+                        {
+                            gameLive = false;
+                            break;
                         }
                     }
                 }

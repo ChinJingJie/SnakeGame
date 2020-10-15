@@ -23,6 +23,14 @@ namespace SnakeGame
             //Random value
             Random randx = new Random();
             Random randy = new Random();
+            // point initialization
+            int pts = 0;
+            //randomize food position 
+            int foodx = randx.Next(1, 78); 
+            int foody = randy.Next(1, 23); 
+            //randomize obstacle position 
+            int obstaclex = randx.Next(1, 78); 
+            int obstacley = randy.Next(1, 23);
 
             // fix window size
             Console.SetWindowSize(consoleWidthLimit + 2, consoleHeightLimit + 2);
@@ -42,17 +50,18 @@ namespace SnakeGame
             
 
             //Food
-            int foodx = randx.Next(1, 78);
-            int foody = randy.Next(1, 23);
             Food food = new Food("#", randx.Next(1, 78), randy.Next(1, 23));
             food.GenerateFood(foodx, foody);
             //Obstacles
             for (int i = 0; i < 10; i++)
             {
-                Obstacles obstacles = new Obstacles("||", randx.Next(1, 78), randy.Next(1, 23));
-                obstacles.GenerateObstacles();
+                if (obstaclex != foodx && obstacley != foody)
+                {
+                    Obstacles obstacles = new Obstacles("||", randx.Next(1, 78), randy.Next(1, 23));
+                    obstacles.GenerateObstacles();
+                }
             }
-            
+
             string snakelength = "   ";
             do // until escape
             {
@@ -62,11 +71,14 @@ namespace SnakeGame
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
-                Console.SetCursorPosition(x, y);
+                Console.SetCursorPosition(70, 0);
+                Console.WriteLine("Score: "); 
+                Console.SetCursorPosition(77, 0);
+                Console.WriteLine(pts); 
                 Console.ForegroundColor = cc;
                 times++;
 
-                if (times == 50)
+                if (times == 120)
                 {
                     Console.SetCursorPosition(foodx, foody);
                     if (timesUp == true) {
@@ -74,8 +86,8 @@ namespace SnakeGame
                     }
                     foodx = randx.Next(1, 78);
                     foody = randy.Next(1, 23);
-                    Food food = new Food("#", foodx, foody);
-                    food.GenerateFood();
+                    Food food1 = new Food("#", foodx, foody);
+                    food1.GenerateFood(foodx, foody);
                     times = 0;                                       
                 }
 
@@ -140,6 +152,7 @@ namespace SnakeGame
                 {
                     ch += "*";
                     snakelength += " ";
+                    pts += 1;
                     foodx = randx.Next(1, 78);
                     foody = randy.Next(1, 23);
                     Food food1 = new Food("#", foodx, foody);

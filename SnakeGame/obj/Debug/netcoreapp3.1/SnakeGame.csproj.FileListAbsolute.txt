@@ -37,3 +37,16 @@ C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.run
 C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.dll
 C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.pdb
 C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.genruntimeconfig.cache
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.exe
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.deps.json
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.runtimeconfig.json
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.runtimeconfig.dev.json
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.dll
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.pdb
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.csprojAssemblyReference.cache
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.AssemblyInfoInputs.cache
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.AssemblyInfo.cs
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.csproj.CoreCompileInputs.cache
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.dll
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.pdb
+C:\Users\ASUS ROG\Desktop\Year 2 Sem 1\Development Projects\Week 6(2)\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.genruntimeconfig.cache

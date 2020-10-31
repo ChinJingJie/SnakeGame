@@ -37,3 +37,9 @@ C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.run
 C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.dll
 C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\SnakeGame.pdb
 C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.genruntimeconfig.cache
+C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\sound\coin1.wav
+C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\sound\Downer01.wav
+C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\bin\Debug\netcoreapp3.1\system.windows.extensions.dll
+C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.Properties.Resources.resources
+C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.csproj.GenerateResource.cache
+C:\Users\cjjie\Desktop\SnakeGame\SnakeGame\obj\Debug\netcoreapp3.1\SnakeGame.csproj.CopyComplete

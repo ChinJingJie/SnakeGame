@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Media;
 
 namespace SnakeGame
 {
@@ -173,8 +174,10 @@ namespace SnakeGame
                 Console.SetCursorPosition(x, y);
                 Console.Write(ch);
                 
-                if (x == foodx && y == foody)
+                if (x == foodx && y == foody) //when food eaten
                 {
+                    SoundPlayer playSound = new SoundPlayer(Properties.Resources.coin1); //add sound media
+                    playSound.Play(); //play sound media
                     ch += "*";
                     snakelength += " ";
                     pts += 1;
@@ -186,13 +189,17 @@ namespace SnakeGame
 
                 for (int i = 0; i < 10; i++)
                 {
-                    if (x == Obstaclesx[i] && y == Obstaclesy[i])
+                    if (x == Obstaclesx[i] && y == Obstaclesy[i])  //when crash wall
                     {
                         dx = 0;
                         dy = 0;
+                        if (stop ==true) { //before stop the game movement
+                            SoundPlayer playSound1 = new SoundPlayer(Properties.Resources.Downer01); //add sound media
+                            playSound1.Play(); //play sound media
+                        }
 
                         stop = false;
-
+                      
                         Console.SetCursorPosition((consoleWidthLimit / 2)-3, consoleHeightLimit / 2);
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Game Over", Console.ForegroundColor);

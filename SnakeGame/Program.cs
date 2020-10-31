@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.Encodings.Web;
 
 namespace SnakeGame
 {
@@ -44,7 +42,8 @@ namespace SnakeGame
             // fix window size
             Console.SetWindowSize(consoleWidthLimit + 2, consoleHeightLimit + 2);
             // clear to color
-            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
 
             // delay to slow down the character movement so you can see it
@@ -83,7 +82,7 @@ namespace SnakeGame
                 ConsoleColor cc = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition(0, 0);
-                Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
+                Console.WriteLine("Move up/down/right/left. Press 'p' to pause/resume and 'esc' quit.");
                 Console.SetCursorPosition(70, 0);
                 Console.WriteLine("Score: "); 
                 Console.SetCursorPosition(77, 0);
@@ -134,6 +133,19 @@ namespace SnakeGame
                             break;
                         case ConsoleKey.Escape: //END
                             gameLive = false;
+                            break;
+                        case ConsoleKey.P: //P key
+                            if (stop == true)
+                            {
+                                dx = 0;
+                                dy = 0;
+                                stop = false;
+                            }
+                            else {
+                                dx = 1;
+                                dy = 0;
+                                stop = true;
+                            }   
                             break;
                     }
                 }

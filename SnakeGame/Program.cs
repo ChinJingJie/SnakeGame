@@ -25,11 +25,49 @@ namespace SnakeGame
         bool gameLive, pause, die, win, isprinted, shield, heart;
 
         ConsoleKeyInfo consoleKey; // holds whatever key is pressed
+        
+        void Option()
+        {
+            while (true)
+            {
+                Console.WriteLine("====================");
+                Console.WriteLine("|   Main Menu      |");
+                Console.WriteLine("|   1. Play        |");
+                Console.WriteLine("|   2. Scoreboard  |");
+                Console.WriteLine("|   3. Quit        |");
+                Console.WriteLine("====================");
+                Console.WriteLine("Instruction:");
+                Console.WriteLine("Move up/down/right/left.");
+                Console.WriteLine("");
+                Console.Write("Choice: ");
+                string choice = Console.ReadLine();
+
+                if (choice == "1")
+                {
+                    // start game
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    while (true)
+                    {
+                        
+                        Initialization();
+                        Updates();
+                        Console.Clear();
+                    }
+                }
+                else if (choice == "2")
+                {
+                    Console.WriteLine("Score: " + pts);
+                }
+                else if (choice == "3")
+                {
+                    gameLive = false;
+                    break;
+                }
+            }
+        }
 
         void MainMenu() {
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-
             // fix window size
             Console.SetWindowSize(consoleWidthLimit + 2, consoleHeightLimit + 2);
             // clear to color
@@ -288,6 +326,10 @@ namespace SnakeGame
                 {
                     Environment.Exit(0);
                 }
+                else
+                {
+                    Option();
+                }
             }
         }
 
@@ -297,6 +339,9 @@ namespace SnakeGame
             Console.WriteLine("Game Finished", Console.ForegroundColor);
             Console.SetCursorPosition((consoleWidthLimit / 2) - 3, (consoleHeightLimit / 2) + 1);
             Console.WriteLine("Score: " + pts);
+            string[] scores = { "Score: " + pts };
+            File.WriteAllLines("score.txt", scores);
+            
             while (true)
             {
                 consoleKey = Console.ReadKey(true);
@@ -410,12 +455,7 @@ namespace SnakeGame
         {
             Program snake = new Program();
             snake.MainMenu();
-            while (true)
-            {
-                snake.Initialization();
-                snake.Updates();
-                Console.Clear();
-            }
+            snake.Option();
         }
     }
 

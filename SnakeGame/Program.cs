@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using System.Collections.Generic;
 using System.Media;
 
@@ -49,7 +51,7 @@ namespace SnakeGame
                     Console.ReadKey();
                     while (true)
                     {
-                        
+                        MainMenu();
                         Initialization();
                         Updates();
                         Console.Clear();
@@ -57,7 +59,12 @@ namespace SnakeGame
                 }
                 else if (choice == "2")
                 {
-                    Console.WriteLine("Score: " + pts);
+                    var path = "score.txt";
+                    string[] score = File.ReadAllLines(path, Encoding.UTF8);
+                    foreach (string line in score)
+                    {
+                        Console.WriteLine(line);
+                    }
                 }
                 else if (choice == "3")
                 {
@@ -317,6 +324,8 @@ namespace SnakeGame
             Console.WriteLine("Game Over", Console.ForegroundColor);
             Console.SetCursorPosition((consoleWidthLimit / 2) - 3, (consoleHeightLimit / 2) + 1);
             Console.WriteLine("Score: " + pts);
+            string[] scores = { "Score: " + pts };
+            File.AppendAllLines("score.txt", scores);
 
             while (true)
             {
@@ -328,6 +337,7 @@ namespace SnakeGame
                 }
                 else
                 {
+                    Console.Clear();
                     Option();
                 }
             }
@@ -339,8 +349,6 @@ namespace SnakeGame
             Console.WriteLine("Game Finished", Console.ForegroundColor);
             Console.SetCursorPosition((consoleWidthLimit / 2) - 3, (consoleHeightLimit / 2) + 1);
             Console.WriteLine("Score: " + pts);
-            string[] scores = { "Score: " + pts };
-            File.WriteAllLines("score.txt", scores);
             
             while (true)
             {

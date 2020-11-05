@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
-using System.Media;
 
 namespace SnakeGame
 {
@@ -11,7 +10,8 @@ namespace SnakeGame
         //declare variables
 
         char ch;
-        int x, y, nTail, dx, dy, pts, foodx, foody, obstaclex, obstacley, shieldx, shieldy, heartx, hearty, delayInMillisecs, times, shieldtimes,hearttimes, Level, heartcount;
+        string user;
+        int x, y, nTail, dx, dy, pts, ptsTotal, foodx, foody, obstaclex1, obstacley1, obstaclex2, obstacley2, obstaclex3, obstacley3, shieldx, shieldy, heartx, hearty, delayInMillisecs, times, shieldtimes, hearttimes, Level, heartcount;
         int[] TailX = new int[100];
         int[] TailY = new int[100];
 
@@ -21,13 +21,10 @@ namespace SnakeGame
         Random randx = new Random();
         Random randy = new Random();
 
-        List<int> Obstaclesx = new List<int>();
-        List<int> Obstaclesy = new List<int>();
-
         bool gameLive, pause, die, win, isprinted, shield, heart;
 
         ConsoleKeyInfo consoleKey; // holds whatever key is pressed
-        
+
         void Option()
         {
             while (true)
@@ -46,12 +43,11 @@ namespace SnakeGame
 
                 if (choice == "1")
                 {
+                    Console.Write("Username: ");
+                    user = Console.ReadLine();
                     // start game
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
                     while (true)
                     {
-                        MainMenu();
                         Initialization();
                         Updates();
                         Console.Clear();
@@ -59,12 +55,17 @@ namespace SnakeGame
                 }
                 else if (choice == "2")
                 {
+                    Console.Clear();
+                    Console.WriteLine("====================");
+                    Console.WriteLine("Scoreboard:");
+                    Console.WriteLine("====================");
                     var path = "score.txt";
                     string[] score = File.ReadAllLines(path, Encoding.UTF8);
                     foreach (string line in score)
                     {
                         Console.WriteLine(line);
                     }
+                    Console.WriteLine("====================");
                 }
                 else if (choice == "3")
                 {
@@ -100,15 +101,12 @@ namespace SnakeGame
             foodx = randx.Next(1, 78);
             foody = randy.Next(1, 23);
             //obstacles 
-            //generate 10 obstacles positions
-            for (int i = 0; i < 10; i++)
-            {
-                obstaclex = randx.Next(1, 78);
-                obstacley = randy.Next(1, 23);
-
-                Obstaclesx.Add(obstaclex);
-                Obstaclesy.Add(obstacley);
-            }
+            obstaclex1 = randx.Next(1, 78);
+            obstacley1 = randy.Next(1, 23);
+            obstaclex2 = randx.Next(1, 78);
+            obstacley2 = randy.Next(1, 23);
+            obstaclex3 = randx.Next(1, 78);
+            obstacley3 = randy.Next(1, 23);
             //shield
             shieldx = randx.Next(1, 78);
             shieldy = randx.Next(1, 23);
@@ -117,6 +115,7 @@ namespace SnakeGame
             hearty = randx.Next(1, 23);
             //score
             pts = 0;
+            ptsTotal = 0;
             // delay to slow down the character movement so you can see it
             delayInMillisecs = 200;
             // Timer
@@ -202,16 +201,16 @@ namespace SnakeGame
             // calculate the new position
             // note x set to 0 because we use the whole width, but y set to 1 because we use top row for instructions
             x += dx;
-            if (x > consoleWidthLimit)
+            if (x > consoleWidthLimit - 2)
                 x = 0;
             if (x < 0)
-                x = consoleWidthLimit;
+                x = consoleWidthLimit - 2;
 
             y += dy;
-            if (y > consoleHeightLimit)
-                y = 2; // 2 due to top spaces used for directions
-            if (y < 2)
-                y = consoleHeightLimit;
+            if (y > consoleHeightLimit - 2)
+                y = 1;
+            if (y < 1)
+                y = consoleHeightLimit - 2;
 
             //time interval for random new food
             if (times == 120 && pause == false)
@@ -236,64 +235,56 @@ namespace SnakeGame
             }
 
             //when food eaten
-            if (x == foodx && y == foody) 
+            if (x == foodx && y == foody)
             {
                 //SoundPlayer playSound = new SoundPlayer(Properties.Resources.coin1); //add sound media
                 //playSound.Play(); //play sound media
                 Console.Beep();
                 nTail++;
                 pts += 1;
+                ptsTotal += 1;
                 foodx = randx.Next(1, 78);
                 foody = randy.Next(1, 23);
             }
 
             if (x == shieldx && y == shieldy)
             {
-                //SoundPlayer playSound = new SoundPlayer(Properties.Resources.coin1); //add sound media
-                //playSound.Play(); //play sound media
                 shield = true;
-                
             }
 
             if (x == heartx && y == hearty)
             {
-                //SoundPlayer playSound = new SoundPlayer(Properties.Resources.coin1); //add sound media
-                //playSound.Play(); //play sound media
+                heartx = 0;
+                hearty = 0;
                 heart = true;
                 heartcount += 1;
             }
 
             //when crash wall
-            for (int i = 0; i < 10; i++)
+            if ((x == obstaclex1 && y == obstacley1) || (x == obstaclex2 && y == obstacley2) || (x == obstaclex3 && y == obstacley3))
             {
-                if (x == Obstaclesx[i] && y == Obstaclesy[i])  
+                if (shield == false && heart == false)
                 {
-                    if(shield == false && heart == false)
-                    {
-
-                        if (pause == false)
-                        { //before stop the game movement
-                          // SoundPlayer playSound1 = new SoundPlayer(Properties.Resources.Downer01); //add sound media
-                          //playSound1.Play(); //play sound media
-                            dx = 0;
-                            dy = 0;
-                            pause = true;
-                        }
-                        gameLive = false;
-                        die = true;
+                    if (pause == false)
+                    { //before stop the game movement
+                      // SoundPlayer playSound1 = new SoundPlayer(Properties.Resources.Downer01); //add sound media
+                      //playSound1.Play(); //play sound media
+                        dx = 0;
+                        dy = 0;
+                        pause = true;
                     }
-                    else
+                    gameLive = false;
+                    die = true;
+                }
+                else
+                {
+                    if ((shield == true && heart == false) || (shield == true && heart == true))
                     {
-                        if (shield == true)
-                        {
-                            shield = false;
-                        }
-                        
-                        if (heart == true)
-                        {
-                            heart = false;
-                            heartcount = 0;
-                        }
+                        shield = false;
+                    }else
+                    {
+                        heart = false;
+                        heartcount = 0;
                     }
                 }
             }
@@ -323,9 +314,11 @@ namespace SnakeGame
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Game Over", Console.ForegroundColor);
             Console.SetCursorPosition((consoleWidthLimit / 2) - 3, (consoleHeightLimit / 2) + 1);
-            Console.WriteLine("Score: " + pts);
-            string[] scores = { "Score: " + pts };
+            Console.WriteLine("Score: " + ptsTotal);
+            string[] scores = { "Username " + user + ": Level "+ Level+ " - Score: " + ptsTotal };
             File.AppendAllLines("score.txt", scores);
+            Console.SetCursorPosition((consoleWidthLimit / 2) -15, (consoleHeightLimit / 2) + 2);
+            Console.WriteLine("Press 'r' to return to main page");
 
             while (true)
             {
@@ -335,7 +328,7 @@ namespace SnakeGame
                 {
                     Environment.Exit(0);
                 }
-                else
+                if (consoleKey.Key == ConsoleKey.R)
                 {
                     Console.Clear();
                     Option();
@@ -348,8 +341,12 @@ namespace SnakeGame
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Game Finished", Console.ForegroundColor);
             Console.SetCursorPosition((consoleWidthLimit / 2) - 3, (consoleHeightLimit / 2) + 1);
-            Console.WriteLine("Score: " + pts);
-            
+            Console.WriteLine("Score: " + ptsTotal);
+            string[] scores = { "Username " + user + ": Level " + Level + " - Score: " + ptsTotal };
+            File.AppendAllLines("score.txt", scores);
+            Console.SetCursorPosition((consoleWidthLimit / 2) -15, (consoleHeightLimit / 2) + 2);
+            Console.WriteLine("Press 'r' to return to main page");
+
             while (true)
             {
                 consoleKey = Console.ReadKey(true);
@@ -358,6 +355,11 @@ namespace SnakeGame
                 {
                     Environment.Exit(0);
                 }
+                if (consoleKey.Key == ConsoleKey.R)
+                {
+                    Console.Clear();
+                    Option();
+                }
             }
         }
 
@@ -365,14 +367,14 @@ namespace SnakeGame
             Console.SetCursorPosition(0, 0);
             ConsoleColor cc = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine("Level: " + Level );
-            Console.SetCursorPosition(8, 0);
+            Console.SetCursorPosition(5, 0);
+            Console.WriteLine("Level: " + Level);
+            Console.SetCursorPosition(30, 0);
             Console.WriteLine("Heart: " + heartcount);
             Console.SetCursorPosition(70, 0);
             Console.WriteLine("Score: ");
             Console.SetCursorPosition(77, 0);
-            Console.WriteLine(pts);
+            Console.WriteLine(ptsTotal);
             Console.ForegroundColor = cc;
             times++;
             shieldtimes++;
@@ -380,24 +382,27 @@ namespace SnakeGame
             {
                 for (int j = 0; j < consoleWidthLimit; j++)
                 {
-                    for (int o = 0; o < 10; o++)
-                    {
-                        if (Obstaclesx[o] == j && Obstaclesy[o] == i)
-                        {
-                            Console.Write("||");
-                        }
-                    }
-
                     if (j == foodx && i == foody)
                     {
                         Console.Write("#");
                     }
-
+                    else if (j == obstaclex1 && i == obstacley1)
+                    {
+                        Console.Write("|");
+                    }
+                    else if (j == obstaclex2 && i == obstacley2)
+                    {
+                        Console.Write("|");
+                    }
+                    else if (j == obstaclex3 && i == obstacley3)
+                    {
+                        Console.Write("|");
+                    }
                     else if (j == shieldx && i == shieldy)
                     {
                         if(shield == false)
                         {
-                            Console.Write("[]");
+                            Console.Write("[");
                         }
                         
                     }
@@ -421,7 +426,8 @@ namespace SnakeGame
                     {
                         if (heart == false)
                         {
-                            Console.Write("♥");
+                            Console.Write("H", Console.ForegroundColor = ConsoleColor.Red);
+                            Console.ForegroundColor = ConsoleColor.Black;
                         }
 
                     }

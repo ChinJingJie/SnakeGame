@@ -480,6 +480,50 @@ namespace SnakeGame
         {
             pts = score;
         }
+        
+        public int getTail()
+        {
+            return nTail;
+        }
+
+        public void SetX(int X)
+        {
+            x = X;
+        }
+
+        public void SetY(int Y)
+        {
+            y = Y;
+        }
+        public void SetFoodX(int foodX)
+        {
+            foodx = foodX;
+        }
+
+        public void SetFoodY(int foodY)
+        {
+            foody = foodY;
+        }
+        public void SetDX(int dX)
+        {
+            dx = dX;
+        }
+
+        public void SetDY(int dY)
+        {
+            dy = dY;
+        }
+
+        public void SetHeartCount(int count)
+        {
+            heartcount = count;
+        }
+
+        public int getHeart()
+        {
+            return heartcount;
+        }
+        
         static void Main(string[] args)
         {
             Program snake = new Program();

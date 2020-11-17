@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SnakeGame
 {
-    class Program
+    public class Program
     {
         //declare variables
 
@@ -25,7 +25,7 @@ namespace SnakeGame
 
         ConsoleKeyInfo consoleKey; // holds whatever key is pressed
 
-        void Option()
+        public void Option()
         {
             while (true)
             {
@@ -75,7 +75,7 @@ namespace SnakeGame
             }
         }
 
-        void MainMenu() {
+        public void MainMenu() {
             // fix window size
             Console.SetWindowSize(consoleWidthLimit + 2, consoleHeightLimit + 2);
             // clear to color
@@ -85,7 +85,7 @@ namespace SnakeGame
             Console.CursorVisible = false;
         }
 
-        void Initialization() {
+        public void Initialization() {
             //snake
             ch = '*';
             x = 0;
@@ -130,7 +130,7 @@ namespace SnakeGame
             heart = false;
         }
 
-        void Input() {
+        public void Input() {
             // see if a key has been pressed
             if (Console.KeyAvailable)
             {
@@ -176,7 +176,7 @@ namespace SnakeGame
             }
         }
 
-        void Logic() {
+        public void Logic() {
 
             //track tail position of the snake when movement occurs
             int preX = TailX[0];
@@ -309,7 +309,7 @@ namespace SnakeGame
                 win = true;
             }
         }
-        void Die() {
+        public void Die() {
             Console.SetCursorPosition((consoleWidthLimit / 2) - 3, consoleHeightLimit / 2);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Game Over", Console.ForegroundColor);
@@ -336,7 +336,7 @@ namespace SnakeGame
             }
         }
 
-        void Win() {
+        public void Win() {
             Console.SetCursorPosition((consoleWidthLimit / 2) - 3, consoleHeightLimit / 2);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Game Finished", Console.ForegroundColor);
@@ -363,7 +363,7 @@ namespace SnakeGame
             }
         }
 
-        void Render() {
+        public void Render() {
             Console.SetCursorPosition(0, 0);
             ConsoleColor cc = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -452,7 +452,7 @@ namespace SnakeGame
             }
         }
 
-        void Updates() {
+        public void Updates() {
             while (gameLive)
             {
                 Input();
@@ -464,6 +464,21 @@ namespace SnakeGame
                 Win();
             if (!gameLive && die)
                 Die();
+        }
+
+        public bool getGameLive()
+        {
+            return gameLive;
+        }
+
+        public int getLevel()
+        {
+            return Level;
+        }
+
+        public void SetScore(int score)
+        {
+            pts = score;
         }
         static void Main(string[] args)
         {
